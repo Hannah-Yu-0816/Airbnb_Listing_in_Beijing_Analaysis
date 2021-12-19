@@ -1,0 +1,163 @@
+<!doctype html>
+<html>
+
+<head>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style type="text/css">
+            table {
+                width: 90%;
+                background: #ccc;
+                margin: 10px auto;
+                border-collapse: collapse;
+            }
+            th,td {
+                height: 25px;
+                line-height: 25px;
+                text-align: center;
+                border: 1px solid #ccc;
+            }
+            th {
+                background: #eee;
+                font-weight: normal;
+            }
+            tr {
+                background: #fff;
+            }
+            tr:hover {
+                background: #cc0;
+            }
+            td a {
+                color: #06f;
+                text-decoration: none;
+            }
+            td a:hover {
+                color: #06f;
+                text-decoration: underline;
+            }
+        </style>
+</head>
+
+<body>
+    <h1>{{header}}</h1>
+    <h6><a href="/">Return to index page</a></h6>
+
+    <!--
+    <h3 style="background:lightblue;padding:10px">Cluster results of listings price</h3>
+    <div id="chart14" class="knn"></div>
+    <p>Number of each cluster is {{count}}</p>
+
+    <h3 style="background:lightblue;padding:10px">Your advice</h3>
+    <p>Your listing belongs to cluster {{results}}.</p>
+    <p>It is suggested that you can set the room price to about {{avg}}. Or you can adjust your price from {{min}} to {{max}}.</p>
+    -->
+    <h3 style="background:lightblue;padding:10px">The basic information you entered</h3>
+    <div>
+        <table border = "1px">
+            <thead>
+                <tr>
+                    <th scope="col">neighbourhood</th>
+                    <th scope="col">latitude</th>
+                    <th scope="col">longitude</th>
+                    <th scope="col">room_type</th>
+                    <th scope="col">host_type</th>
+                    <th scope="col">accommodates</th>
+                    <th scope="col">minimum_nights</th>
+                    <th scope="col">availability_30</th>
+                </tr>
+            </thead>
+
+            <tr>
+                <td>{{ new[0] }}</td>
+                <td>{{ new[1] }}</td>
+                <td>{{ new[2] }}</td>
+                <td>{{ new[3] }}</td>
+                <td>{{ new[4] }}</td>
+                <td>{{ new[5] }}</td>
+                <td>{{ new[6] }}</td>
+                <td>{{ new[7] }}</td>
+            </tr>
+        </table>
+    </div>
+
+    <h3 style="background:lightblue;padding:10px">The top {{k}} listings (nearest {{k}} neighbours) that most similar to your listing</h3>
+
+    <div>
+        <table border = "1px">
+
+
+            <thead>
+                <tr>
+                    <th scope="col">No.</th>
+                    <th scope="col">neighbourhood</th>
+                    <th scope="col">latitude</th>
+                    <th scope="col">longitude</th>
+                    <th scope="col">room_type</th>
+                    <th scope="col">accommodates</th>
+                    <th scope="col">minimum_nights</th>
+                    <th scope="col">availability_30</th>
+                    <th scope="col">host_type</th>
+                    <th scope="col">description</th>
+                    <th scope="col">amenities</th>
+                    <th scope="col">price</th>
+                </tr>
+            </thead>
+
+            {%  for row in knn %}
+            <tr>
+                <td>{{ row[0] }}</td>
+                <td>{{ row[1] }}</td>
+                <td>{{ row[2] }}</td>
+                <td>{{ row[3] }}</td>
+                <td>{{ row[4] }}</td>
+                <td>{{ row[5] }}</td>
+                <td>{{ row[6] }}</td>
+                <td>{{ row[7] }}</td>
+                <td>{{ row[8] }}</td>
+                <td>{{ row[10] }}</td>
+                <td>{{ row[11] }}</td>
+                <td>{{ row[9] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <h3 style="background:lightblue;padding:10px">Brief summary for the listings retrieved by KNN</h3>
+    The prices of the top {{k}} listings that most similar to your listing are shown below.
+    <div>
+        <table border = "1px">
+            <tr>
+                <td>No.</td>
+                {% for i in range(1,k+1) %}
+                <td>{{i}}</td>
+                {% endfor %}
+            </tr>
+            <tr>
+                <td>price</td>
+                {% for i in price %}
+                <td>{{i}}</td>
+                {% endfor %}
+            </tr>
+        </table>
+    </div>
+    The lowest price of the listings is {{d[3]}} and the highest price of the listings is {{d[7]}}.
+
+    <h3 style="background:lightblue;padding:10px">Suggested price for your listing</h3>
+        Based on the basic information you provided, we recommend you set the price of your listing as {{d[1]}} and adjust the range of the price between {{d[4]}} and {{d[6]}}.
+        <br>
+        <br>
+        However, based on the limited information that are entered in the model, if you want to get a more accurate price suggestion, we recommend you review the description and amenities lists in the top 5 nearest neighbors table to figure out the detailed differences between your listing and others.
+
+</body>
+
+<!--
+<script>
+
+    d14 = {{ graphJSON14 | safe }};
+    Plotly.newPlot('chart14', d14, {});
+
+
+</script>
+-->
+
+</html>

@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+
+<head>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        body{text-align:center}
+    </style>
+</head>
+
+<body>
+    <h1>{{header}}</h1>
+    <h6><a href="/">Return to index page</a></h6>
+
+    <h3 style="background:lightblue;padding:10px">Listings distribution</h3>
+    <div class="card">
+        <img src="{{ url_for('static', filename='img/distribution.png') }}" class="card-img-top" alt="..." height = "600", width = "800">
+        <div class="card-body">
+        <p class="card-text"></p>
+        </div>
+    </div>
+    <div id="chart" class="wholecity"></div>
+
+    <h3 style="background:lightblue;padding:10px">Room Type</h3>
+    <div id="chart1" class="wholecity"></div>
+    <div id="chart2" class="wholecity"></div>
+
+    <h3 style="background:lightblue;padding:10px">Host Type</h3>
+    <p>Define host type:</p>
+    <p>
+        If the host owns less than 5 listings, define the host type as "Personal".
+        If the host owns less than 20 listings and more than 5 listings, define the host type as "Small scale company".
+        If the host owns less than 100 listings and more than 20 listings, define the host type as "Medium scale company".
+        If the host owns more than 100 listings, define the host type as "Large scale company".
+    </p>
+    <div id="chart3" class="wholecity"></div>
+    <div id="chart4" class="wholecity"></div>
+
+    <h3 style="background:lightblue;padding:10px">Price</h3>
+    <div id="chart5" class="wholecity"></div>
+
+    <h3 style="background:lightblue;padding:10px">Availability</h3>
+    <p>Define Availability:</p>
+    <p>
+        If the listing is available for more than 60 days per year, define the availability as "highly available".
+        If the listing is available for less than 60 days per year, define the availability as "lowly available".
+    </p>
+    <div id="chart6" class="wholecity"></div>
+    <div id="chart7" class="wholecity"></div>
+
+    <h3 style="background:lightblue;padding:10px">Income of the host</h3>
+    <p>Define Income:</p>
+    <p>
+        Income = The minimum number of days that can be booked * Review per month * Available days per month * Price
+    </p>
+    <div id="chart8" class="wholecity"></div>
+
+</body>
+
+<script>
+
+    d0 = {{ graphJSON0 | safe }};
+    Plotly.newPlot('chart', d0, {});
+
+    d1 = {{ graphJSON1 | safe }};
+    Plotly.newPlot('chart1', d1, {});
+
+    d2 = {{ graphJSON2 | safe }};
+    Plotly.newPlot('chart2', d2, {});
+
+    d3 = {{ graphJSON3 | safe }};
+    Plotly.newPlot('chart3', d3, {});
+
+    d4 = {{ graphJSON4 | safe }};
+    Plotly.newPlot('chart4', d4, {});
+
+    d5 = {{ graphJSON5 | safe }};
+    Plotly.newPlot('chart5', d5, {});
+
+    d6 = {{ graphJSON6 | safe }};
+    Plotly.newPlot('chart6', d6, {});
+
+    d7 = {{ graphJSON7 | safe }};
+    Plotly.newPlot('chart7', d7, {});
+
+    d8 = {{ graphJSON8 | safe }};
+    Plotly.newPlot('chart8', d8, {});
+
+</script>
+
+</html>

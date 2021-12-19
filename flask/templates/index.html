@@ -1,0 +1,148 @@
+<!doctype html>
+<html>
+
+<body style="font-family:arial, sans-serif">
+
+    <h1>Airbnb listing in Beijing</h1>
+
+    <h3 style="background:lightblue;padding:10px">Study Objective</h3>
+        <p>
+            This website is designed to realize interactive data visualization of the Airbnb listings of Beijing.
+            The website provides three parts of analysis, whole city analysis, each district analysis, and get your own advice.
+            The whole city analysis provides an overview of the distribution and detailed information of the whole city.
+            Each district analysis will only show the information and analysis of the selected district.
+            For the last part, get your own advice. K-means clustering method is used to help give you advice based on your own condition.
+            First, enter the number of the clusters you want to try, then enter the acquired information below to retrieve the prices for other listings in the same cluster as yours.
+            Get your own advice shows you a suggested price range of your listing based on the condition.
+        </p>
+
+    <h3 style="background:lightblue;padding:10px">Data Resources</h3>
+
+        <p>
+            The data I used in this project is a room listing data from Airbnb official website.
+            See data source here <a href="http://insideairbnb.com/get-the-data.html">Listings of Airbnb in Beijing</a>.
+            This dataset was collected by Airbnb and all the confidential information was removed from the dataset.
+        </p>
+
+
+    <h3 style="background:lightblue;padding:10px">Data Description</h3>
+        <p>
+            There are 72 variables in this dataset. The variables of this dataset can be divided into 5 parts.
+        </p>
+        <p>
+            Basic information of the listing, including id, url, name, description and so on.
+        </p>
+        <p>
+            Basic information of the host, including host_id, host_url, host_name, host_location, host_response_time and so on.
+        </p>
+        <p>
+            Geo information of the listing, including neighbourhood, latitude, longitude and so on.
+        </p>
+        <p>
+            Booking information of the listing, including room_type, accommodates, amenities, price, availability and so on.
+        </p>
+        <p>
+            Review information of the listing, including number_of_reviews, number_of_reviews, reviews_per_month.
+        </p>
+
+
+    <h3 style="background:lightblue;padding:10px">Whole City Analysis</h3>
+    <a href="wholecity">View the analysis of Beijing</a>
+
+    <h3 style="background:lightblue;padding:10px">Each District Analysis</h3>
+    <form action = "district" method = "POST">
+        <h4></h4><p>Please select the name of the district you want to view</p></h4>
+        <select name="options">
+            <option value="Dongcheng">Dongcheng</option>
+            <option value="Xicheng">Xicheng</option>
+            <option value="Changping">Changping</option>
+            <option value="Daxing">Daxing</option>
+            <option value="Fangshan">Fangshan</option>
+            <option value="Huairou">Huairou</option>
+            <option value="Mentougou">Mentougou</option>
+            <option value="Miyun">Miyun</option>
+            <option value="Pinggu">Pinggu</option>
+            <option value="Yanqing">Yanqing</option>
+            <option value="Chaoyang">Chaoyang</option>
+            <option value="Fengtai">Fengtai</option>
+            <option value="Haidian">Haidian</option>
+            <option value="Shunyi">Shunyi</option>
+            <option value="Tongzhou">Tongzhou</option>
+            <option value="Shijingshan">Shijingshan</option>
+        </select>
+        <input type = "submit" value = "submit" />
+    </form>
+
+    <h3 style="background:lightblue;padding:10px">Get your own advice (K-NN)</h3>
+
+
+    <form action = "knn" method = ["GET"]>
+
+        <h4><p>Please enter the number of the nearest neighbors you would like to retrieve</p></h4>
+        <input type = "number" name = "input" />
+
+        <p>------------------------------------------------------------------------------------------------------------------------------------</p>
+
+
+        <h4><p>Please select your neighbourhood:</p></h4>
+        <select name="neighbourhood">
+            <option value="1">Dongcheng</option>
+            <option value="2">Xicheng</option>
+            <option value="3">Changping</option>
+            <option value="4">Daxing</option>
+            <option value="5">Fangshan</option>
+            <option value="6">Huairou</option>
+            <option value="7">Mentougou</option>
+            <option value="8">Miyun</option>
+            <option value="9">Pinggu</option>
+            <option value="10">Yanqing</option>
+            <option value="11">Chaoyang</option>
+            <option value="12">Fengtai</option>
+            <option value="13">Haidian</option>
+            <option value="14">Shunyi</option>
+            <option value="15">Tongzhou</option>
+            <option value="16">Shijingshan</option>
+        </select>
+
+        <h4><p>Please enter the latitude of your listings: </p></h4>
+        <p>Note: latitude should between 39.4-41.6.</p>
+        <input type = "text" name = "latitude" />
+
+        <h4><p>Please enter the longitude of your listings: </p></h4>
+        <p>Note: longitude should between 115.7-117.4.</p>
+        <input type = "text" name = "longitude" />
+
+        <h4><p>Please select your room type:</p></h4>
+        <select name="room_type">
+            <option value=1>Entire home/apt</option>
+            <option value=2>Private room</option>
+            <option value=3>Shared room</option>
+        </select>
+
+        <h4><p>Please select your host type: </p></h4>
+        <p>Note: The number of Airbnb listings you own. Personal: <5; Small scale company:(5,20]; Medium scale company: (20,100]; Large scale company: >100.</p>
+        <select name="host_type">
+            <option value=1>Small scale company</option>
+            <option value=2>Personal</option>
+            <option value=3>Medium scale company</option>
+            <option value=4>Large scale company</option>
+        </select>
+
+        <h4><p>Please enter the largest number of people that can accommodate: </p></h4>
+        <input type = "number" name = "accommodates" />
+
+        <h4><p>Please enter the minimum number of nights that can book: </p></h4>
+        <input type = "number" name = "minimum_nights" />
+
+        <h4><p>Please enter the largest number of days that your listing is available per month: </p></h4>
+        <input type = "number" name = "availability_30" />
+
+        <br>
+        <br>
+
+        <input type = "submit" value = "Get your own advice" />
+    </form>
+
+</body>
+
+</html>

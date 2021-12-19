@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+
+<head>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        body{text-align:center}
+    </style>
+</head>
+
+<body>
+    <h1>{{header}}</h1>
+    <h6><a href="/">Return to index page</a></h6>
+
+    <h3 style="background:lightblue;padding:10px">Room Type</h3>
+    <div id="chart9" class="wholecity"></div>
+
+    <h3 style="background:lightblue;padding:10px">Host Type</h3>
+    <div id="chart10" class="wholecity"></div>
+
+    <h3 style="background:lightblue;padding:10px">Price</h3>
+    <div id="chart11" class="wholecity"></div>
+
+    <h3 style="background:lightblue;padding:10px">Availability</h3>
+    <div id="chart12" class="wholecity"></div>
+
+    <h3 style="background:lightblue;padding:10px">Income</h3>
+    <div id="chart13" class="wholecity"></div>
+
+</body>
+
+<script>
+
+    d9 = {{ graphJSON9 | safe }};
+    Plotly.newPlot('chart9', d9, {});
+
+    d10 = {{ graphJSON10 | safe }};
+    Plotly.newPlot('chart10', d10, {});
+
+    d11 = {{ graphJSON11 | safe }};
+    Plotly.newPlot('chart11', d11, {});
+
+    d12 = {{ graphJSON12 | safe }};
+    Plotly.newPlot('chart12', d12, {});
+
+    d13 = {{ graphJSON13 | safe }};
+    Plotly.newPlot('chart13', d13, {});
+
+</script>
+
+</html>
